@@ -15,7 +15,7 @@ function App()
   [
     { word: 'RATER', language: 'French', meaning: 'to miss/fail' },
     { word: 'GIFT', language: 'German', meaning: 'poison' },
-    { word: 'BRAT', language: 'Russian', meaning: 'brother' },
+    { word: 'БРАТ', language: 'Russian', meaning: 'brother' },
     { word: 'PIE', language: 'Spanish', meaning: 'foot' },
     { word: 'ARM', language: 'German', meaning: 'poor' },
     { word: 'CHEF', language: 'French', meaning: 'boss/chief' }
