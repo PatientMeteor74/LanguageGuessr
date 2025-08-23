@@ -25,10 +25,12 @@ function App()
   {
     if (e) e.preventDefault()
       // guess checking logic here
+
     console.log("Guessed:", guess)
     setGuess("")
   }
-  const nextWord = () => {
+  const nextWord = () =>
+    {
     if (wordNumber < totalWords) {
       setWordNumber(wordNumber + 1)
       setCurrentWord(wordBank[wordNumber]?.word || 'NEXT')
@@ -36,50 +38,53 @@ function App()
   }
 
   return (
-    <div className="min-h-screen bg-green-400 flex items-center justify-center">
-      <div className="text-center">
+    <div className="min-h-screen bg-[#85ff93] flex items-center justify-center">
+      <div className="text-center max-w-md w-full">
         {/* Title */}
-        <h1 className="text-6xl font-light text-gray-700 mb-2 underline font-times">
+        <h1 className="text-6xl font-light text-[#59915f] mb-2 underline font-serif">
           ¿Lin•go•Guess?
         </h1>
         
         {/* Subtitle */}
-        <div className="text-gray-700 text-lg mb-12 flex justify-center space-x-8 font-times">
+        <div className="text-[#8cd49f] text-lg ml-5 mb-12 flex space-x-40 font-serif text-left">
           <span>/ˈliNGɡō/</span>
           <span>ges</span>
         </div>
         
         {/* Word counter */}
-        <div className="text-gray-700 text-lg mb-4 font-times">
+        <div className="text-[#8cd49f] text-lg font-serif text-left">
           word {wordNumber} of {totalWords} is
         </div>
         
         {/* Current word */}
-        <div className="text-6xl md:text-7xl font-bold text-gray-800 mb-8 tracking-widest font-times">
-          {currentWord}
+        <div className="mb-2">
+          <div className="md:text-3xl font-bold text-[#59915f] mb-0 tracking-widest font-serif text-left">
+            {currentWord}.
+          </div>
+          <div className="w-[527px] h-[2px] bg-[#59915f] mx-auto"></div>
         </div>
-        
         {/* Input field */}
-        <div className="w-full max-w-md mb-8">
+        <div className="w-full max-w-md mb-4 ml-20">
           <input
             type="text"
             value={guess}
             onChange={(e) => setGuess(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleGuess(e)}
-            placeholder="Guess a language"
-            className="w-full px-5 py-4 text-lg bg-green-700 text-green-100 green-200 rounded-lg border-none outline-none focus:ring-1 focus:ring-green-300 font-times"
+            placeholder="  Guess a language"
+            className="w-full px-2 py-1 text-lg bg-[#59915f] text-[#85ff93] rounded-lg border-none outline-none focus:ring-1 focus:ring-[#85ff93] font-serif italic"
+            style={{ caretColor: '#8cd49f' }}
           />
         </div>
         
         {/* Score */}
-        <div className="text-gray-700 text-lg font-times">
-          Your score today is <span className="font-semibold">{score} pt.</span>
+        <div className="text-[#8cd49f] text-lg font-serif mr-20">
+          Your score today is <span className="font-semibold text-[#59915f]">{score} pt.</span>
         </div>
         
         {/* Debug button for development */}
         <button 
           onClick={nextWord}
-          className="mt-8 px-6 py-2 bg-gray-700 text-green-100 rounded-lg hover:bg-gray-600 transition-colors"
+          className="mt-20 px-2 py-1 bg-[#59915f] text-[#8cd49f] rounded-lg hover:bg-[#7f8f5f] transition-colors"
         >
           Next Word [DEV]
         </button>
