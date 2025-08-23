@@ -1,0 +1,70 @@
+{
+    "Indo":
+    {
+        "Indo-Iranian":
+        {
+            "Indic":
+            {
+                "Vedic Sanskrit": 
+                {
+                    "Classical Sanskrit":
+                    {
+                        "Assamese":
+                        [
+
+                        ],
+                        "Bengali":
+                        [
+                            {"word": "খুশি", "translation": "Happy", "definition_1": "feeling or showing pleasure or contentment.", "definition_2": "having a sense of confidence in or satisfaction with (a person, arrangement, or situation)."},
+                            {"word": "দরিদ্র", "translation": "Poor", "definition_1": "lacking sufficient money to live at a standard considered comfortable or normal in a society."}
+                        ],
+                        "Bihari":
+                        [
+
+                        ],
+                        "Sinhalese":
+                        [
+
+                        ],
+                        "Marathi":
+                        [
+
+                        ],
+                        "Gujarati":
+                        [
+                        
+                        ]
+                    },
+                    "Middle Indic":
+                    {
+                        "Hindi":
+                        [
+
+                        ],
+                        "Sindhi":
+                        [
+
+                        ],
+                        "Punjabi":
+                        [
+
+                        ],
+                        "Urdu":
+                        [
+
+                        ],
+                        "Romany":
+                        [
+
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "Proto-European":
+    {
+
+    }
+
+}
