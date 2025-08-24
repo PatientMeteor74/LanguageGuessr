@@ -1,3 +1,18 @@
+import { useState } from 'react'
+import data from './language-tree.json'
+
+function TreeNode({ name, data})
+{
+    const hasChildren = data && typeof data === "object" && Object.keys(data).some(key => key === 'dictionary')
+    const hasDictionary = data && data.dictionary && Array.isArray(data.dictionary) && data.dictionary.length > 0
+
+    return (
+        <div className="text-center">
+            <h1 className="text-8xl font-bold text-green-900 mb-8">name</h1>
+        </div>
+    )
+}
+
 function TreeScene({ navigateToScene }) 
 {
     return (

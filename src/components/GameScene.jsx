@@ -13,37 +13,37 @@ function GameScene({ navigateToScene, score, setScore})
         { 
             word: 'RATER', 
             language: 'French', 
-            translation: "'fail'", 
+            translation: "Fail", 
             meaning: "to be unsuccessful in achieving one's goal; to not succeed" 
         },
         { 
             word: 'GIFT', 
             language: 'German', 
-            translation: "'poison'", 
+            translation: "Poison", 
             meaning: "a toxic substance that causes harm or death when ingested or absorbed" 
         },
         { 
             word: 'БРАТ', 
             language: 'Russian', 
-            translation: "'brother'", 
+            translation: "Brother", 
             meaning: "a male sibling; a male who shares the same parents" 
         },
         { 
             word: 'PIE', 
             language: 'Spanish', 
-            translation: "'foot'", 
+            translation: "Foot", 
             meaning: "the lower extremity of the leg below the ankle; used for standing and walking" 
         },
         { 
             word: 'ARM', 
             language: 'German', 
-            translation: "'poor'", 
+            translation: "Poor", 
             meaning: "lacking sufficient money or resources; having little wealth" 
         },
         { 
             word: 'CHEF', 
             language: 'French', 
-            translation: "'boss/chief'", 
+            translation: "Boss/Chief", 
             meaning: "a person in charge; a leader or head of an organization or group" 
         }
     ]
@@ -86,6 +86,13 @@ function GameScene({ navigateToScene, score, setScore})
 
     return (
         <div className="min-h-screen bg-[#85ff93] flex items-center justify-center">
+            style=
+            {{
+                backgroundImage: "url(/src/assets/background.png)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat"
+            }}
             <div className="text-center max-w-md w-full">
                 {/* Title */}
                 <h1 className="text-6xl font-light text-[#59915f] mb-2 underline font-serif">
@@ -93,13 +100,13 @@ function GameScene({ navigateToScene, score, setScore})
                 </h1>
                 
                 {/* Subtitle */}
-                <div className="text-[#8cd49f] text-lg ml-5 mb-12 flex space-x-40 font-serif text-left">
+                <div className="text-[#72D07C] text-lg ml-5 mb-12 flex space-x-40 font-serif text-left">
                     <span>/ˈliNGɡō/</span>
                     <span>ges</span>
                 </div>
                 
                 {/* Word counter */}
-                <div className="text-[#8cd49f] text-lg font-serif text-left">
+                <div className="text-[#72D07C] text-lg font-serif text-left">
                     word {wordNumber} of {totalWords} is 
                 </div>
                 
@@ -112,12 +119,12 @@ function GameScene({ navigateToScene, score, setScore})
                 </div>
 
                 {/*English translation & definition subtitle */}
-                <div className="text-[#8cd49f] text-lg font-serif text-left mb-2">
+                <div className="text-[#72D07C] text-lg font-serif text-left mb-2">
                     Meaning <span className="font-semibold text-[#59915f]">{currentTranslation}</span> {currentDefinition}. 
                 </div>
 
                 {/* Input field */}
-                <div className="w-full max-w-md mb-4 ml-20">
+                <div className="w-full max-w-md mb-8 ml-20">
                     <input
                         type="text"
                         value={guess}
@@ -125,19 +132,27 @@ function GameScene({ navigateToScene, score, setScore})
                         onKeyDown={(e) => e.key === 'Enter' && handleGuess(e)}
                         placeholder="  Guess a language"
                         className="w-full px-2 py-1 text-lg bg-[#59915f] text-[#85ff93] rounded-lg border-none outline-none focus:ring-1 focus:ring-[#85ff93] font-serif placeholder:italic"
-                        style={{ caretColor: '#8cd49f' }}
+                        style={{ caretColor: '#72D07C' }}
                     />
                 </div>
                 
+                {/* Button to confirm guess in input field */}
+                <button 
+                    onClick={() => handleGuess()}
+                    className="mb-30 px-3 py-3 bg-[#59915f] text-[#85ff93] rounded-lg hover:bg-[#7f8f5f] transition-colors font-serif font-semibold mr-40"
+                >
+                Confirm Guess
+                </button>
+
                 {/* Score */}
-                <div className="text-[#8cd49f] text-lg font-serif mr-20">
+                <div className="text-[#72D07C] text-lg font-serif mr-20">
                     Your score today is <span className="font-semibold text-[#59915f]">{score} pt.</span>
                 </div>
                 
                 {/* Debug button for development */}
                 <button 
                     onClick={nextWord}
-                    className="mt-20 px-2 py-1 mr-10 bg-[#59915f] text-[#8cd49f] rounded-lg hover:bg-[#7f8f5f] transition-colors"
+                    className="mt-20 px-2 py-1 mr-10 bg-[#59915f] text-[#72D07C] rounded-lg hover:bg-[#7f8f5f] transition-colors"
                 >
                 Next Word [DEBUG]
                 </button>
@@ -145,10 +160,11 @@ function GameScene({ navigateToScene, score, setScore})
                 {/* Debug button for development */}
                 <button 
                     onClick={() => navigateToScene("tree")}
-                    className="mt-20 px-2 py-1 bg-[#59915f] text-[#8cd49f] rounded-lg hover:bg-[#7f8f5f] transition-colors"
+                    className="mt-20 px-2 py-1 bg-[#59915f] text-[#72D07C] rounded-lg hover:bg-[#7f8f5f] transition-colors"
                 >
                 Change to Tree Scene [DEBUG]
                 </button>
+
             </div>
         </div>
     )
