@@ -64,7 +64,98 @@
     },
     "Proto-European":
     {
+        "Balto-Slavic":
+        {
 
+        },
+        "Germanic":
+        {
+            "North Germanic":
+            {
+                
+            },
+            "West Germanic":
+            {
+                "Old English":
+                {
+                    "Middle English":
+                    {
+                        "English":
+                        [
+
+                        ]                    
+                    }
+                },
+                "Old Frisian":
+                {
+                    "Frisian":
+                    {
+
+                    }
+                },
+                "Old Low Franconian":
+                {
+                    "Middle Dutch":
+                    {
+                        "Dutch":
+                        [
+
+                        ],
+                        "Flemish":
+                        [
+
+                        ],
+                        "Afrikaans":
+                        [
+
+                        ]
+                    }
+                },
+                "Old Saxon":
+                {
+                    "Middle Low German":
+                    {
+                        "Low German":
+                        [
+
+                        ]
+                    }
+                },
+                "Old High German":
+                {
+                    "Middle High German":
+                    {
+                        "High German":
+                        [
+
+                        ],
+                        "Yiddish":
+                        [
+
+                        ]
+
+                    }
+                }
+
+
+                
+            },
+            "East Germanic":
+            {
+                "Gothic":
+                [
+                    
+                ]
+            }
+        },
+        "Celtic":
+        {
+
+        },
+        "Italic":
+        {
+
+        }
     }
 
 }
