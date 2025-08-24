@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import data from './language-tree.json'
+//import data from './language-tree.json'
 
 function TreeNode({ name, data})
 {
@@ -16,7 +16,7 @@ function TreeNode({ name, data})
 function TreeScene({ navigateToScene }) 
 {
     return (
-        <div className="min-h-screen bg-[#85ff93] flex items-center justify-center">
+        <div className="min-h-screen bg-[#81d177] flex items-center justify-center">
             <div className="text-center">
                 <h1 className="text-8xl font-bold text-white mb-8">TREE</h1>
                 <button 
