@@ -1,33 +1,24 @@
-import { useState } from 'react'
-import data from './language-tree.json'
+import LanguageTree from './Tree'
+import languageData from '../language-tree.json'
 
-function TreeNode({ name, data})
-{
-    const hasChildren = data && typeof data === "object" && Object.keys(data).some(key => key === 'dictionary')
-    const hasDictionary = data && data.dictionary && Array.isArray(data.dictionary) && data.dictionary.length > 0
-
+function TreeScene({ navigateToScene }) {
     return (
-        <div className="text-center">
-            <h1 className="text-8xl font-bold text-green-900 mb-8">name</h1>
-        </div>
-    )
-}
-
-function TreeScene({ navigateToScene }) 
-{
-    return (
-        <div className="min-h-screen bg-[#85ff93] flex items-center justify-center">
-            <div className="text-center">
-                <h1 className="text-8xl font-bold text-white mb-8">TREE</h1>
+        <div className="min-h-screen bg-[#85ff93] flex flex-col">
+            <div className="flex items-center justify-between p-6">
+                <h1 className="text-8xl font-bold text-white">TREE</h1>
                 <button 
-                onClick={() => navigateToScene("game")}
-                className="px-6 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-colors text-xl"
+                    onClick={() => navigateToScene("game")}
+                    className="px-6 py-3 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-colors text-xl"
                 >
-                Back to Game
+                    Back to Game
                 </button>
             </div>
+            
+            <div className="flex-1">
+                <LanguageTree languageData={languageData} />
+            </div>
         </div>
-    )
+    );
 }
 
-export default TreeScene
+export default TreeScene;
