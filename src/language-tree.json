@@ -64,7 +64,42 @@
     },
     "Proto-European":
     {
+        "Balto-Slavic":
+        {
 
+        },
+        "Germanic":
+        {
+            "North Germanic":
+            {
+                
+            },
+            "West Germanic":
+            {
+                "Old English":
+                {
+                    "Middle English":
+                    {
+                        "English":
+                        [
+                            
+                        ]                    
+                    }
+                }
+            },
+            "East Germanic":
+            {
+
+            }
+        },
+        "Celtic":
+        {
+
+        },
+        "Italic":
+        {
+
+        }
     }
 
 }
