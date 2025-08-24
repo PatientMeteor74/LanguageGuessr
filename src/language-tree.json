@@ -1,6 +1,23 @@
 {
     "Indo":
     {
+        "Tocharian":
+        {
+            "Tocharian A":
+            {
+                "dictionary":
+                [
+
+                ]
+            },
+            "Tocharian B":
+            {
+                "dictionary":
+                [
+
+                ]
+            }
+        },
         "Indo-Iranian":
         {
             "Indic":
@@ -10,69 +27,512 @@
                     "Classical Sanskrit":
                     {
                         "Assamese":
-                        [
-                        
-                        ],
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        },
                         "Bengali":
-                        [
-                            {"word": "খুশি", "translation": "Happy", "definition_1": "feeling or showing pleasure or contentment.", "definition_2": "having a sense of confidence in or satisfaction with (a person, arrangement, or situation)."},
-                            {"word": "দরিদ্র", "translation": "Poor", "definition_1": "lacking sufficient money to live at a standard considered comfortable or normal in a society."}
-                        ],
+                        {
+                            "dictionary":
+                            [
+                                {"word": "খুশি", "translation": "Happy", "definition_1": "feeling or showing pleasure or contentment.", "definition_2": "having a sense of confidence in or satisfaction with (a person, arrangement, or situation)."},
+                                {"word": "দরিদ্র", "translation": "Poor", "definition_1": "lacking sufficient money to live at a standard considered comfortable or normal in a society."}
+                            ]
+                        },
                         "Bihari":
-                        [
-                        
-                        ],
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        },
                         "Sinhalese":
-                        [
-                        
-                        ],
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        },
                         "Marathi":
-                        [
-                        
-                        ],
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        },
                         "Gujarati":
-                        [
-                        
-                        ]
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        }
                     },
                     "Middle Indic":
                     {
                         "Hindi":
-                        [
-                        
-                        ],
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        },
                         "Sindhi":
-                        [
-                        
-                        ],
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        },
                         "Punjabi":
-                        [
-                        
-                        ],
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        },
                         "Urdu":
-                        [
-                        
-                        ],
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        },
                         "Romany":
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        }
+                    }
+                }
+            },
+            "Dardic":
+            {
+                "dictionary":
+                [
+
+                ]
+            },
+            "Nuristani":
+            {
+                "dictionary":
+                [
+
+                ]
+            },
+            "Iranian":
+            {
+                "Northeast":
+                {
+                    "Khotanese":
+                    {
+                        "dictionary":
                         [
-                        
+
                         ]
+                    }
+                },
+                "Central":
+                {
+                    "Sogdian":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Bactrian":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Parthian":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Aveston":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Ossetic":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Pashto":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Baluchi":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Kurdish":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    }
+                },
+                "Southwest":
+                {
+                    "Old Persian":
+                    {
+                        "dictionary":
+                        [
+
+                        ],
+                        "Middle Persian":
+                        {
+                            "dictionary":
+                            [
+
+                            ],
+                            "Tajik":
+                            {
+                                "dictionary":
+                                [
+
+                                ]
+                            },
+                            "Farsi":
+                            {
+                                "dictionary":
+                                [
+
+                                ]
+                            }
+
+                        }
                     }
                 }
             }
+        },
+        "Anatolian":
+        {
+            "Hittite":
+            {
+                "dictionary":
+                [
+
+                ]
+            },
+            "Palaic":
+            {
+                "dictionary":
+                [
+
+                ]
+            },
+            "Luvian":
+            {
+                "dictionary":
+                [
+
+                ]
+            },
+            "Hieroglyphic Luvian":
+            {
+                "dictionary":
+                [
+
+                ]
+            },
+            "Lycian":
+            {
+                "dictionary":
+                [
+
+                ]
+            },
+            "Carian":
+            {
+                "dictionary":
+                [
+
+                ]
+            },
+            "Lydian":
+            {
+                "dictionary":
+                [
+
+                ]
+            }
+        },
+        "Phrygian":
+        {
+            "dictionary":
+            [
+
+            ]
+        },
+        "Classical Armenian":
+        {
+            "dictionary":
+            [
+
+            ],
+            "Armenian":
+            {
+                "dictionary":
+                [
+
+                ]
+            }
+        },
+        "Hellenic":
+        {
+            "Ancient Greek":
+            {
+                    "dictionary":
+                    [
+
+                    ],
+                    "Medieval Greek":
+                    {
+                        "dictionary":
+                        [
+
+                        ],
+                        "Greek":
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        }
+                    }
+            }
+        },
+        "Thracian":
+        {
+            "dictionary":
+            [
+
+            ]
+        },
+        "Albanian":
+        {
+            "Tosk":
+            {
+                "dictionary":
+                [
+
+                ]
+            },
+            "Gheg":
+            {
+                "dictionary":
+                [
+
+                ]
+            }
+        },
+        "Illyrian":
+        {
+            "dictionary":
+            [
+
+            ]
+        },
+        "Messapie":
+        {
+            "dictionary":
+            [
+
+            ]
         }
+
     },
     "Proto-European":
     {
         "Balto-Slavic":
         {
+            "Baltic":
+            {
+                "Old Prussian":
+                {
+                    "dictionary":
+                    [
 
+                    ]
+                },
+                "Lithuanian":
+                {
+                    "dictionary":
+                    [
+
+                    ]
+                },
+                "Latvian":
+                {
+                    "dictionary":
+                    [
+
+                    ]
+                }
+            },
+
+            "Slavic":
+            {
+                "West Slavic":
+                {
+                    "Serbian":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Polish":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Slavik":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Czhech":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    }
+                },
+                "South Slavik":
+                {
+                    "Slovene":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Serbo-Croatian":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Macedonian":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Bulgarian":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Old Church Slavonic":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    }
+                },
+                "East Slavic":
+                {
+                    "Ukranian":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Belarusian":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Russian":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    }
+                }
+            }
         },
         "Germanic":
         {
             "North Germanic":
             {
-                
+                "Old Norse":
+                {
+                    "Old Icelandic":
+                    {
+                        "dictionary":
+                        [
+                            {"word": "Gligglefart", "translation": "Masturbation", "definition_1": "to goon"}
+                        ],
+                        "Icelandic":
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        }
+                    },
+                    "Faroese":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Old Norwegian":
+                    {
+                        "Middle Norwegian":
+                        {
+                            "Norwegian":
+                            {
+                                "dictionary":
+                                [
+
+                                ]
+                            }
+                        }
+                    }
+                }
             },
             "West Germanic":
             {
@@ -81,16 +541,22 @@
                     "Middle English":
                     {
                         "English":
-                        [
+                        {
+                            "dictionary":
+                            [
 
-                        ]                    
+                            ]
+                        }
                     }
                 },
                 "Old Frisian":
                 {
                     "Frisian":
                     {
+                        "dictionary":
+                        [
 
+                        ]
                     }
                 },
                 "Old Low Franconian":
@@ -98,17 +564,26 @@
                     "Middle Dutch":
                     {
                         "Dutch":
-                        [
+                        {
+                            "dictionary":
+                            [
 
-                        ],
+                            ]
+                        },
                         "Flemish":
-                        [
+                        {
+                            "dictionary":
+                            [
 
-                        ],
+                            ]
+                        },
                         "Afrikaans":
-                        [
+                        {
+                            "dictionary":
+                            [
 
-                        ]
+                            ]
+                        }
                     }
                 },
                 "Old Saxon":
@@ -116,46 +591,289 @@
                     "Middle Low German":
                     {
                         "Low German":
-                        [
+                        {
+                            "dictionary":
+                            [
 
-                        ]
+                            ]
+                        }
                     }
                 },
-                "Old High German":
-                {
-                    "Middle High German":
-                    {
-                        "High German":
-                        [
-
-                        ],
-                        "Yiddish":
-                        [
-
-                        ]
-
-                    }
-                }
-
-
-                
+                        "Old High German":
+                        {
+                            "Middle High German":
+                            {
+                                    "High German":
+                                    {
+                                        "dictionary":
+                                        [
+                                            
+                                        ]
+                                    },
+                                    "Yiddish":
+                                    {
+                                        "dictionary":
+                                        [
+                                            
+                                        ]
+                                    }
+                            }
+                        }
             },
             "East Germanic":
             {
                 "Gothic":
-                [
-                    
-                ]
+                {
+                    "dictionary":
+                    [
+
+                    ]
+                }
             }
         },
         "Celtic":
         {
+            "Insular":
+            {
+                "Goidelic":
+                {
+                    "Old Irish":
+                    {
+                        "dictionary":
+                        [
 
+                        ],
+                        "Middle Irish":
+                        {
+                            "dictionary":
+                            [
+
+                            ],
+                            "Irish Gaelie":
+                            {
+                                "dictionary":
+                                [
+
+                                ]
+                            },
+                            "Scottish Gaelie":
+                            {
+                                "dictionary":
+                                [
+
+                                ]
+                            },
+                            "Manx":
+                            {
+                                "dictionary":
+                                [
+
+                                ]
+                            }
+                        }
+                    }
+                },
+                "Brittonic":
+                {
+                    "Medieval Breton":
+                    {
+                        "dictionary":
+                        [
+
+                        ],
+                        "Breton":
+                        {
+                            
+                        }
+                    },
+                    "Medieval Cornish":
+                    {
+                        "dictionary":
+                        [
+
+                        ],
+                        "Cronish":
+                        {
+                            
+                        }
+                    },
+                    "Old Welsh":
+                    {
+                        "dictionary":
+                        [
+
+                        ],
+                        "Medieval Welsh":
+                        {
+                            "dictionary":
+                            [
+
+                            ],
+                            "Welsh":
+                            {
+                                
+                            }
+                        }
+                    }
+                }
+            },
+            "Continental":
+            {
+                "Gaulish":
+                {
+                    "dictionary":
+                    [
+
+                    ]                    
+                },
+                "Celtibarian":
+                {
+                    "dictionary":
+                    [
+
+                    ]
+                }
+            }
         },
         "Italic":
         {
+            "Latino-Faliscan":
+            {
+                "Faliscan":
+                {
+                    "dictionary":
+                    [
 
+                    ]
+                },
+                "Latin":
+                {
+                    "dictionary":
+                    [
+
+                    ],
+                    "Old Portuguese":
+                    {
+                        "dictionary":
+                        [
+
+                        ],
+                        "Portuguese":
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        }
+                    },
+                    "Old Spanish":
+                    {
+                        "dictionary":
+                        [
+
+                        ],
+                        "Spanish":
+                        {
+                            
+                        }
+                    },
+                    "Catalan":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Old Provencal":
+                    {
+                        "dictionary":
+                        [
+
+                        ],
+                        "Provencal":
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        }
+                    },
+                    "Old French":
+                    {
+                        "dictionary":
+                        [
+
+                        ],
+                        "French":
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        }
+                    },
+                    "Old Italian":
+                    {
+                        "dictionary":
+                        [
+
+                        ],
+                        "Italian":
+                        {
+                            "dictionary":
+                            [
+
+                            ]
+                        }
+                    },
+                    "Rhaeto-Romance":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    },
+                    "Romanian":
+                    {
+                        "dictionary":
+                        [
+
+                        ]
+                    }
+                }
+            },
+            "Sabellic":
+            {
+                "Oscan":
+                {
+                    "dictionary":
+                    [
+
+                    ]
+                },
+                "Umbrian":
+                {
+                    "dictionary":
+                    [
+
+                    ]
+                },
+                "South Piscene":
+                {
+                    "dictionary":
+                    [
+
+                    ]
+                }
+            }
+        },
+        "Venetic":
+        {
+            "dictionary":
+            [
+
+            ]
         }
     }
-
 }
+
