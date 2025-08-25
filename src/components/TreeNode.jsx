@@ -5,10 +5,21 @@ function TreeNode({ name, data, level = 0 })
 {
     // Check if this node has children (non-dictionary keys)
     const hasChildren = data && typeof data === 'object' && Object.keys(data).some(key => key !== 'dictionary');
-    
-    // Get children (all keys except 'dictionary')
+    const nodeRef = useRef(null);
+    const [nodeWidth, setNodeWidth] = useState(0);
+
+    useEffect(() => {
+        if (nodeRef.current) {
+            const width = nodeRef.current.getBoundingClientRect().width;
+            setNodeWidth(width);
+        }
+    }, [name]);
+
+    // Calculate spacing based on combined widths of children
     const children = hasChildren ? Object.entries(data).filter(([key]) => key !== 'dictionary') : [];
-    
+    const totalChildrenWidth = children.length * 120; // Estimate or measure
+    const spacing = Math.max(80, totalChildrenWidth / children.length);
+
     return (
         <div className="flex flex-col items-center">
             <div className="text-center whitespace-nowrap px-2 py-1">
@@ -16,8 +27,8 @@ function TreeNode({ name, data, level = 0 })
             </div>
             
             {hasChildren && children.length > 0 && (
-                <div className="mt-16"> {/* Increased vertical spacing */}
-                    <div className="flex justify-center" style={{ gap: '80px' }}> {/* Much larger horizontal spacing */}
+                <div className="mt-16">
+                    <div className="flex justify-center" style={{ gap: `${spacing}px` }}>
                         {children.map(([childName, childData]) => (
                             <TreeNode 
                                 key={childName}
