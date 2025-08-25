@@ -8,8 +8,10 @@ function TreeNode({ name, data, level = 0 })
     const nodeRef = useRef(null);
     const [nodeWidth, setNodeWidth] = useState(0);
 
-    useEffect(() => {
-        if (nodeRef.current) {
+    useEffect(() => 
+    {
+        if (nodeRef.current) 
+        {
             const width = nodeRef.current.getBoundingClientRect().width;
             setNodeWidth(width);
         }
@@ -17,7 +19,7 @@ function TreeNode({ name, data, level = 0 })
 
     // Calculate spacing based on combined widths of children
     const children = hasChildren ? Object.entries(data).filter(([key]) => key !== 'dictionary') : [];
-    const totalChildrenWidth = children.length * 120; // Estimate or measure
+    const totalChildrenWidth = children.length * 80;
     const spacing = Math.max(80, totalChildrenWidth / children.length);
 
     return (

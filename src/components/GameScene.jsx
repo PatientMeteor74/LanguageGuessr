@@ -85,14 +85,7 @@ function GameScene({ navigateToScene, score, setScore})
     }
 
     return (
-        <div className="min-h-screen bg-[#85ff93] flex items-center justify-center">
-            style=
-            {{
-                backgroundImage: "url(/src/assets/background.png)",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat"
-            }}
+        <div className="min-h-screen bg-[url(/src/assets/background.png)] bg-no-repeat bg-cover flex items-center justify-center">
             <div className="text-center max-w-md w-full">
                 {/* Title */}
                 <h1 className="text-6xl font-light text-[#59915f] mb-2 underline font-serif">
