@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import AutoCompleteInput from './AutocompleteInputField'
 
+const API_BASE = "https://lingo-guess.onrender.com"
+
 function GameScene({ navigateToScene, score, setScore, guess, setGuess, language, setLanguage, allLanguages, allLanguageNames, userId, shouldAdvanceWord, setShouldAdvanceWord})
 {
     const [currentWord, setCurrentWord] = useState("...")
@@ -63,21 +65,37 @@ function GameScene({ navigateToScene, score, setScore, guess, setGuess, language
     {
         const loadUserProgress = async () => 
         {
-            if (!userId || userId === 'undefined') {
+            if (!userId || userId === 'undefined') 
+            {
                 console.warn('userId not set; skipping progress load');
                 return;
             }
             
             try 
             {
-                const response = await fetch(`https://lingo-guess.onrender.com/api/user/${userId}`);
+                const response = await fetch(`${API_BASE}/api/user/${userId}`);
+                
+                if (!response.ok) 
+                {
+                    console.warn('Failed to fetch user progress, starting from word 1');
+                    return;
+                }
+                
                 const userData = await response.json();
+                
+                // Validate that we got actual user data, not an error response
+                if (!userData || userData.error) 
+                {
+                    console.warn('Invalid user data received:', userData);
+                    return;
+                }
+                
                 setUserProgress(userData);
                 
                 // Set word number based on progress
                 // progress_today is stored as 0-based index of how many words have been completed (0 = none done).
                 // To show the current word number to the user we want a 1-based value:
-                const currentWordNumber = (userData && typeof userData.progress_today === 'number') ? (userData.progress_today + 1) : 1;
+                const currentWordNumber = (typeof userData.progress_today === 'number') ? (userData.progress_today + 1) : 1;
                 setWordNumber(currentWordNumber);
                 
                 console.log('Loaded user progress:', userData);
@@ -109,7 +127,7 @@ function GameScene({ navigateToScene, score, setScore, guess, setGuess, language
             {
                 try 
                 {
-                    const response = await fetch('https://lingo-guess.onrender.com/api/daily-words', {
+                    const response = await fetch(`${API_BASE}/api/daily-words`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ languages: allLanguages, totalWords: 5 })
@@ -166,7 +184,7 @@ function GameScene({ navigateToScene, score, setScore, guess, setGuess, language
     {
         try 
         {
-            await fetch("https://lingo-guess.onrender.com/api/update-progress", 
+            await fetch(`${API_BASE}/api/update-progress`, 
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

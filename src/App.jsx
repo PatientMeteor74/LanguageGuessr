@@ -4,6 +4,8 @@ import TreeScene from './components/TreeScene.jsx'
 import FinalScoreScene from './components/FinalScoreScene.jsx'
 import languageData from './language-tree.json'
 
+const API_BASE = "https://lingo-guess.onrender.com"
+
 function App() 
 {
   const [currentScene, setCurrentScene] = useState("game")
@@ -11,6 +13,8 @@ function App()
   // Shared state that multiple scenes might need
   const [score, setScore] = useState(0)
   const [userId, setUserId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [serverError, setServerError] = useState(null);
   const [guess, setGuess] = useState("")
   const [language, setLanguage] = useState("")
   const [roundScore, setRoundScore] = useState(0)
@@ -55,60 +59,107 @@ function App()
   const allLanguages = getAllLanguages(languageData)
   const allLanguageNames = getLanguageNames(allLanguages)
 
+  // Helper to create a new user on the server
+  const createNewUser = async () => 
+  {
+    const res = await fetch(`${API_BASE}/api/new-user`, { method: "POST" })
+    if (!res.ok) 
+    {
+      throw new Error(`Server returned ${res.status}`)
+    }
+    const data = await res.json()
+    return data.id
+  }
+
+  // Helper to verify a user exists on the server
+  const verifyUser = async (id) => 
+  {
+    const res = await fetch(`${API_BASE}/api/user/${id}`)
+    if (res.status === 404) 
+    {
+      return null // User doesn't exist
+    }
+    if (!res.ok) 
+    {
+      throw new Error(`Server returned ${res.status}`)
+    }
+    return await res.json()
+  }
+
   // Initialize or restore userId on mount
   useEffect(() => 
   {
     console.log("Attempting to init user.")
     const initUser = async () => 
     {
+      setIsLoading(true)
+      setServerError(null)
+      
       let id = localStorage.getItem("userId")
-      // Somewhat lazy last played date implementation; TODO: Implement last played date in DB
       const lastPlayedDate = localStorage.getItem("lastPlayedDate")
       const today = new Date().toISOString().split('T')[0] // YYYY-MM-DD
-
       const isNewDay = lastPlayedDate !== today
 
-      if (!id || id === "undefined") 
+      try 
       {
-        try 
+        // Case 1: No stored userId - create new user
+        if (!id || id === "undefined" || id.startsWith("local-")) 
         {
-          const res = await fetch("https://lingo-guess.onrender.com/api/new-user", { method: "POST" })
-          const data = await res.json()
-          id = data.id
+          console.log("Creating new user...")
+          id = await createNewUser()
           localStorage.setItem("userId", id)
           localStorage.setItem("lastPlayedDate", today)
           console.log("New user created:", id)
-        } catch (err) {
-          console.error("Failed to create user:", err)
-          // fallback to client-side id so UI still works
-          id = crypto?.randomUUID?.() || `local-${Date.now()}`
-          localStorage.setItem("userId", id)
-          localStorage.setItem("lastPlayedDate", today)
-          console.log("Falling back to client-generated userId:", id)
+        } 
+        else 
+        {
+          // Case 2: Have stored userId - verify it exists on server
+          console.log("Verifying existing user:", id)
+          const userData = await verifyUser(id)
+          
+          if (!userData) 
+          {
+            // User doesn't exist in DB (maybe was client-generated or deleted)
+            console.log("Stored user not found in DB, creating new user...")
+            id = await createNewUser()
+            localStorage.setItem("userId", id)
+            localStorage.setItem("lastPlayedDate", today)
+            console.log("New user created:", id)
+          } 
+          else if (isNewDay) 
+          {
+            // User exists, but it's a new day - reset progress
+            console.log("Resetting progress for new day...")
+            await fetch(`${API_BASE}/api/reset-daily-progress`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ id })
+            })
+            localStorage.setItem("lastPlayedDate", today)
+            console.log("Reset progress for new day:", id)
+          } 
+          else 
+          {
+            console.log("Existing user verified, same day:", id)
+          }
         }
-      } else if (isNewDay) {
-        // Reset user progress for new day
-        try {
-          await fetch("https://lingo-guess.onrender.com/api/reset-daily-progress", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id })
-          })
-          localStorage.setItem("lastPlayedDate", today)
-          console.log("Reset progress for new day:", id)
-        } catch (err) {
-          console.error("Failed to reset daily progress:", err)
-          // Still update the date to avoid repeated attempts
-          localStorage.setItem("lastPlayedDate", today)
-        }
-      } else {
-        console.log("Existing user, same day:", id)
+        
+        setUserId(id)
+        setServerError(null)
+      } 
+      catch (err) 
+      {
+        console.error("Failed to initialize user:", err)
+        setServerError("Unable to connect to server. Please try again later.")
+        // Don't set userId - this prevents broken state
+      } 
+      finally 
+      {
+        setIsLoading(false)
       }
+    }
     
-    setUserId(id)
-    localStorage.setItem("userId", id)
-  }
-  initUser()
+    initUser()
   }, [])
 
   // Update server score when score changes (and userId is available)
@@ -131,7 +182,7 @@ function App()
       
       try 
       {
-        const response = await fetch("https://lingo-guess.onrender.com/api/update-score", 
+        const response = await fetch(`${API_BASE}/api/update-score`, 
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -157,24 +208,27 @@ function App()
     }
   }, [score, userId])
 
+  // Check if user has already completed today's game (only on initial load)
   useEffect(() => 
   {
     const checkCompletion = async () => 
     {
-      if (!userId || userId === 'undefined' || currentScene !== 'game') 
+      if (!userId || userId === 'undefined') 
       {
         return;
       }
       
       try 
       {
-        const response = await fetch(`https://lingo-guess.onrender.com/api/user/${userId}`);
+        const response = await fetch(`${API_BASE}/api/user/${userId}`);
+        if (!response.ok) return;
+        
         const userData = await response.json();
         
-        // If user has completed all 5 words
-        if (userData && userData.progress_today >= 4) 
+        // If user has completed all 5 words, redirect to end screen
+        if (userData && userData.progress_today >= 4 && userData.played_today) 
         {
-          console.log('User has completed all words, redirecting to final screen');
+          console.log('User has already completed today, redirecting to final screen');
           setCurrentScene('end');
         }
       } catch (error) {
@@ -183,7 +237,7 @@ function App()
     };
 
     checkCompletion();
-  }, [userId, currentScene]);
+  }, [userId]);
 
   // Scene navigation functions
   const navigateToScene = (sceneName) => 
@@ -197,7 +251,7 @@ function App()
     if (currentScene === "tree" && sceneName === "game" && shouldAdvanceWord) 
     {
       // Check if we're completing the last word by looking at current progress
-      fetch(`https://lingo-guess.onrender.com/api/user/${userId}`)
+      fetch(`${API_BASE}/api/user/${userId}`)
         .then(res => res.json())
         .then(userData => 
         {
@@ -248,6 +302,46 @@ function App()
       .then(data => console.log(data))
       .catch(err => console.error(err));
   }, []);*/
+
+  // Show loading state while initializing user
+  if (isLoading) 
+  {
+    return (
+      <div className="min-h-screen bg-[url(/src/assets/background.png)] flex items-center justify-center bg-cover bg-no-repeat">
+        <div className="text-center">
+          <h1 className="text-4xl font-light text-[#5e814c] mb-4 font-serif">
+            Loading...
+          </h1>
+          <p className="text-[#70a861] font-serif">
+            Connecting to server (this may take up to 50 seconds on first load)
+          </p>
+        </div>
+      </div>
+    )
+  }
+
+  // Show error state if server connection failed
+  if (serverError) 
+  {
+    return (
+      <div className="min-h-screen bg-[url(/src/assets/background.png)] flex items-center justify-center bg-cover bg-no-repeat">
+        <div className="text-center max-w-md">
+          <h1 className="text-4xl font-light text-[#5e814c] mb-4 font-serif">
+            Connection Error
+          </h1>
+          <p className="text-[#70a861] font-serif mb-6">
+            {serverError}
+          </p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 border-4 border-[#5e814c] bg-transparent text-[#5e814c] rounded-lg hover:bg-[#5e814c] hover:text-[#81d177] transition-colors font-serif font-semibold"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <>

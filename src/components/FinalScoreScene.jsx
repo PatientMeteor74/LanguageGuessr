@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 
+const API_BASE = "https://lingo-guess.onrender.com"
+
 function FinalScoreScene({ score, userId })
 {
 
@@ -45,11 +47,27 @@ function FinalScoreScene({ score, userId })
             
             try 
             {
-                const response = await fetch(`https://lingo-guess.onrender.com/api/user/${userId}`)
+                const response = await fetch(`${API_BASE}/api/user/${userId}`)
+                
+                if (!response.ok) 
+                {
+                    console.warn('Failed to fetch user score');
+                    setDisplayScore(0);
+                    return;
+                }
+                
                 const userData = await response.json()
                 
+                // Validate response
+                if (!userData || userData.error) 
+                {
+                    console.warn('Invalid user data:', userData);
+                    setDisplayScore(0);
+                    return;
+                }
+                
                 // Use the daily_score from the server
-                const serverScore = userData?.daily_score || 0
+                const serverScore = userData.daily_score || 0
                 setDisplayScore(Number(serverScore))
                 console.log('Loaded score from server:', serverScore)
             } catch (error) {

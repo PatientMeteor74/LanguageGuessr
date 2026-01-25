@@ -6,6 +6,14 @@ import { faker } from '@faker-js/faker';
 
 dotenv.config();
 const app = express();
+
+// UUID validation helper - prevents Postgres errors from invalid UUID format
+const isValidUUID = (str) => 
+{
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    return typeof str === 'string' && uuidRegex.test(str);
+};
+
 app.options('/api/daily-words', cors())
 app.use(cors({
     origin: 'https://lingoguess.vercel.app',
@@ -224,6 +232,12 @@ app.get("/api/user/:id", async (req, res) =>
 {
     const { id } = req.params;
 
+    // Validate UUID format to prevent Postgres errors
+    if (!isValidUUID(id)) 
+    {
+        return res.status(404).json({ error: "User not found" });
+    }
+
     try
     {
         const user = await getUser(id);
@@ -262,9 +276,20 @@ app.post("/api/update-score", async (req, res) =>
     {
         return res.status(400).json({ error: "Missing id or newScore" });
     }
+    
+    // Validate UUID format
+    if (!isValidUUID(id)) 
+    {
+        return res.status(400).json({ error: "Invalid user id format" });
+    }
+    
     try
     {
         const user = await updateScore(id, newScore);
+        if (!user) 
+        {
+            return res.status(404).json({ error: "User not found" });
+        }
         res.json(user);
     } catch (err) {
         console.error("Update-score error:", err);   // full log
@@ -277,9 +302,24 @@ app.post("/api/update-progress", async (req, res) =>
 {
     const { id, wordNumber } = req.body;
 
+    if (!id || typeof wordNumber === 'undefined') 
+    {
+        return res.status(400).json({ error: "Missing id or wordNumber" });
+    }
+    
+    // Validate UUID format
+    if (!isValidUUID(id)) 
+    {
+        return res.status(400).json({ error: "Invalid user id format" });
+    }
+
     try
     {
         const user = await updateProgress(id, wordNumber);
+        if (!user) 
+        {
+            return res.status(404).json({ error: "User not found" });
+        }
         res.json(user);
     } catch (err) {
         console.error("Update progress error:", err);
@@ -294,6 +334,12 @@ app.post("/api/reset-daily-progress", async (req, res) =>
     if (!id) 
     {
         return res.status(400).json({ error: "Missing user id" });
+    }
+    
+    // Validate UUID format
+    if (!isValidUUID(id)) 
+    {
+        return res.status(400).json({ error: "Invalid user id format" });
     }
 
     try 
