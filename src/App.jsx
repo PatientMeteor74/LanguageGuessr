@@ -137,14 +137,13 @@ function App()
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         })
-        
+
+        const data = await response.json()
         if (!response.ok) 
         {
-          const errorData = await response.json()
-          throw new Error(errorData.error || 'Server error')
+          throw new Error(data.error || 'Server error')
         }
         
-        const data = await response.json()
         console.log("Server score updated:", data)
       } catch (err) {
         console.error("Error updating score:", err)
