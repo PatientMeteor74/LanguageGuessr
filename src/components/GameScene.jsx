@@ -217,11 +217,21 @@ function GameScene({ navigateToScene, score, setScore, guess, setGuess, language
         if (shouldAdvanceWord && wordBank.length > 0) 
         {
             const newWordNumber = wordNumber + 1
+            
+            // Safety check: don't advance beyond total words
+            if (newWordNumber > totalWords) 
+            {
+                console.log('Already at max words, should be at end screen')
+                setShouldAdvanceWord(false)
+                navigateToScene("end")
+                return
+            }
+            
             setWordNumber(newWordNumber)
             setShouldAdvanceWord(false)
             console.log(`Advanced to word ${newWordNumber} after tree scene`)
         }
-    }, [shouldAdvanceWord, wordBank, wordNumber, setShouldAdvanceWord])
+    }, [shouldAdvanceWord, wordBank, wordNumber, setShouldAdvanceWord, totalWords, navigateToScene])
 
     const handleGuess = async (e) =>
     {
