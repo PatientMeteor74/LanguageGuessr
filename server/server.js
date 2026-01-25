@@ -40,6 +40,37 @@ app.get("/", (req, res) =>
     res.send("Server is on... 👅");
 });
 
+app.get("/api/health", async (req, res) => 
+{
+    const health = {
+        server: true,
+        database: false,
+        timestamp: new Date().toISOString(),
+        environment: process.env.NODE_ENV || 'development'
+    };
+    
+    try {
+        const result = await db.query("SELECT NOW()");
+        health.database = true;
+        health.dbTime = result.rows[0].now;
+        
+        // Also check if users table exists
+        const tableCheck = await db.query(`
+            SELECT EXISTS (
+                SELECT FROM information_schema.tables 
+                WHERE table_name = 'users'
+            );
+        `);
+        health.usersTableExists = tableCheck.rows[0].exists;
+        
+        res.json(health);
+    } catch (err) {
+        console.error("Health check failed:", err);
+        health.error = err.message;
+        res.status(500).json(health);
+    }
+});
+
 // Database connection test
 app.get("/api/test-db", async (req, res) => 
 {
@@ -48,7 +79,7 @@ app.get("/api/test-db", async (req, res) =>
         res.json({ connected: true, time: result.rows[0].now });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ connected: false });
+        res.status(500).json({ connected: false, error: err.message });
     }
 });
 
@@ -235,6 +266,7 @@ app.get("/api/user/:id", async (req, res) =>
     // Validate UUID format to prevent Postgres errors
     if (!isValidUUID(id)) 
     {
+        console.log(`Invalid UUID format: ${id}`);
         return res.status(404).json({ error: "User not found" });
     }
 
@@ -243,12 +275,15 @@ app.get("/api/user/:id", async (req, res) =>
         const user = await getUser(id);
         if (!user) 
         {
+            console.log(`User not found in DB: ${id}`);
             return res.status(404).json({ error: "User not found" });
         }
         res.json(user);
     } catch (err) {
-        console.error("Get user error: ", err);
-        res.status(500).json({ error: "Failed to get user" });
+        console.error("Get user error for id:", id);
+        console.error("Error details:", err.message);
+        console.error("Error stack:", err.stack);
+        res.status(500).json({ error: "Failed to get user", details: err.message });
     }
 });
 
