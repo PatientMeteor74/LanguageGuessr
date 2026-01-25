@@ -217,7 +217,7 @@ function GameScene({ navigateToScene, score, setScore, guess, setGuess, language
         }
 
         const normalizedGuess = normalizeGuess(guess);
-        setGuess(normalizeGuess);
+        setGuess(normalizedGuess);
         await updateProgressOnServer(wordNumber);
         navigateToScene("tree");
     }
