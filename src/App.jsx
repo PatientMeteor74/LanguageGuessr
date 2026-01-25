@@ -242,31 +242,31 @@ function App()
   // Scene navigation functions
   const navigateToScene = (sceneName) => 
   {
-    // When going from tree back to game, signal that word should advance
+    // When going from tree back to game, check if game is complete
     if (currentScene === "tree" && sceneName === "game") 
     {
-      setShouldAdvanceWord(true)
-    }
-    // if going from tree to game but it's the final word (5/5), go to end instead
-    if (currentScene === "tree" && sceneName === "game" && shouldAdvanceWord) 
-    {
-      // Check if we're completing the last word by looking at current progress
+      // Check completion before advancing
       fetch(`${API_BASE}/api/user/${userId}`)
         .then(res => res.json())
         .then(userData => 
         {
-          // If progress_today will be 4 after advancement (meaning 5 words completed)
+          // progress_today is 0-indexed: 0 = word 1 done, 4 = word 5 done (game complete)
           if (userData && userData.progress_today >= 4) 
           {
-            setShouldAdvanceWord(false) // Reset the flag
+            console.log('Game complete, going to end screen');
+            setShouldAdvanceWord(false)
             setCurrentScene("end")
             return
           }
+          // Not complete yet, advance to next word
+          console.log(`Advancing to word ${userData.progress_today + 2}`);
+          setShouldAdvanceWord(true)
           setCurrentScene(sceneName)
         })
         .catch(err => 
         {
           console.error('Error checking completion:', err)
+          setShouldAdvanceWord(true)
           setCurrentScene(sceneName) // Fallback to normal navigation
         })
       return
